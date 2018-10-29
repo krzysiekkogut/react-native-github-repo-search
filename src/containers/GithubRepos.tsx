@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Title } from '../components/Title';
-import { Search } from '../components/Search';
+import Search from '../components/Search';
 import SearchResults from '../components/SearchResults';
 
 export class GithubRepos extends React.Component {
