@@ -6,7 +6,7 @@ import axiosMiddleware from 'redux-axios-middleware';
 import axios from 'axios';
 
 import { reducer } from './redux/reducer';
-import GithubRepos from './containers/GithubRepos';
+import { GithubRepos } from './containers/GithubRepos';
 
 const client = axios.create({
   baseURL: 'https://api.github.com',

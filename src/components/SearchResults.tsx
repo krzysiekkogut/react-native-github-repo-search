@@ -1,22 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { FlatList, StyleSheet } from 'react-native';
+
+import { ReposState } from '../redux/reducer';
 
 import { EmptyReposList } from './EmptyReposList';
 import { ReposListItem } from './ReposListItem';
 
-const data: string[] = [
-  'react-native',
-  'cypress-first-steps',
-  'angular',
-  'react-redux',
-  'lodash',
-];
+interface Props {
+  repos: string[];
+}
 
-export class SearchResults extends React.Component {
+export class SearchResults extends React.Component<Props> {
   render() {
+    const { repos } = this.props;
+
     return (
       <FlatList
-        data={data}
+        data={repos}
         renderItem={({ item }) => <ReposListItem repo={item} />}
         keyExtractor={item => item}
         ListEmptyComponent={<EmptyReposList />}
@@ -31,3 +32,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+const mapStateToProps = (state: ReposState) => {
+  return { repos: [...state.repos] };
+};
+
+export default connect(mapStateToProps)(SearchResults);
