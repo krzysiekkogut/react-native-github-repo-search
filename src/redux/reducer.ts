@@ -4,8 +4,20 @@ const REPOS_LOAD_FAIL = 'repos/LOAD_FAIL';
 const REPOS_CLEAR = 'repos/CLEAR';
 const REPOS_VALIDATION_ERROR = 'repos/VALIDATION_ERROR';
 
+export interface RepoDetails {
+  id: number;
+  name: string;
+  owner: {
+    login: string;
+    avatar_url: string;
+    url: string;
+  };
+  created_at: Date;
+  stargazers_count: number;
+}
+
 export interface ReposState {
-  repos: string[];
+  repos: RepoDetails[];
   error: string | null
   loading: boolean;
   search: string;
@@ -49,7 +61,7 @@ export function reducer(state = initialState, action: any): ReposState {
     case REPOS_LOAD:
       return { ...state, search: action.query, loading: true };
     case REPOS_LOAD_SUCCESS:
-      return { ...state, loading: false, repos: action.payload.data || [], error: null };
+      return { ...state, loading: false, repos: action.payload.data.items || [], error: null };
     case REPOS_LOAD_FAIL:
       return { ...state, loading: false, repos: [], error: action.error.response.data.message };
     case REPOS_CLEAR:

@@ -11,6 +11,7 @@ import { GithubRepos } from './containers/GithubRepos';
 const client = axios.create({
   baseURL: 'https://api.github.com',
   responseType: 'json',
+  timeout: 2000,
 });
 const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
 
