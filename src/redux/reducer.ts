@@ -20,14 +20,12 @@ export interface ReposState {
   repos: RepoDetails[];
   error: string | null
   loading: boolean;
-  search: string;
 }
 
 const initialState: ReposState = {
   loading: false,
   error: null,
   repos: [],
-  search: '',
 };
 
 export function fetchRepos(query: string) {
@@ -59,15 +57,15 @@ export function showValidationError(query: string) {
 export function reducer(state = initialState, action: any): ReposState {
   switch (action.type) {
     case REPOS_LOAD:
-      return { ...state, search: action.query, loading: true };
+      return { ...state, loading: true };
     case REPOS_LOAD_SUCCESS:
       return { ...state, loading: false, repos: action.payload.data.items || [], error: null };
     case REPOS_LOAD_FAIL:
       return { ...state, loading: false, repos: [], error: action.error.response.data.message };
     case REPOS_CLEAR:
-      return { ...state, search: '', loading: false, repos: [], error: '' };
+      return { ...state, loading: false, repos: [], error: null };
     case REPOS_VALIDATION_ERROR:
-      return { ...state, search: action.query, error: 'Capital letters are not allowed.' }
+      return { ...state, error: 'Capital letters are not allowed.' }
     default:
       return state;
   }

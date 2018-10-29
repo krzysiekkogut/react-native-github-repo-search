@@ -5,39 +5,38 @@ import { ReposState } from '../redux/reducer';
 
 import { fetchRepos, clearRepos, showValidationError } from '../redux/reducer';
 
-interface Actions {
+interface Props {
   fetchRepos: Function;
   clearRepos: Function;
   showValidationError: Function;
 }
 
-interface Props {
-  search: string;
-}
+export class Search extends React.Component<Props> {
+  private timeoutId?: number;
 
-export class Search extends React.Component<Props & Actions> {
   private onChangeText = (searchText: string) => {
-    if (searchText === '') {
-      this.props.clearRepos();
-      return; 
-    }
-
-    if (searchText.toLocaleLowerCase() === searchText) {
-      this.props.fetchRepos(searchText);
-      return;
-    }
-
-    this.props.showValidationError();
+    clearTimeout(this.timeoutId);
+    this.timeoutId = setTimeout(() => {
+      if (searchText === '') {
+        this.props.clearRepos();
+        return;
+      }
+  
+      if (searchText.toLocaleLowerCase() === searchText) {
+        this.props.fetchRepos(searchText);
+        return;
+      }
+  
+      this.props.showValidationError(searchText);
+    }, 500);
   }
 
   render() {
-    const { search } = this.props;
 
     return (
       <TextInput
         style={styles.searchInput}
         placeholder='Repository name'
-        value={search}
         onChangeText={this.onChangeText}
       />
     );
@@ -52,10 +51,6 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = (state: ReposState): Props => {
-  return { search: state.search };
-}
-
 const mapDispatchToProps = { fetchRepos, clearRepos, showValidationError };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(null, mapDispatchToProps)(Search);
