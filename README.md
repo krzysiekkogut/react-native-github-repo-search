@@ -6,4 +6,4 @@ React Native app - searching GitHub repositories
 
 ## To run the app:
 1. `yarn install`
-2. `react-native run-android` with emulator or device connected or `react-native run-ios`
+2. `react-native run-android` with Android emulator or device connected or `react-native run-ios` (only macOS)
