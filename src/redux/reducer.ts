@@ -76,13 +76,13 @@ export function reducer(state = initialState, action: any): ReposState {
     case REPOS_LOAD:
       return { ...state, loading: true };
     case REPOS_LOAD_SUCCESS:
-      return { ...state, loading: false, repos: action.payload.data.items || [], error: null };
+      return { ...state, loading: false, repos: action.payload.data.items || [], error: null, selectedRepos: [] };
     case REPOS_LOAD_FAIL:
-      return { ...state, loading: false, repos: [], error: action.error.response.data.message };
+      return { ...state, loading: false, repos: [], error: action.error.response.data.message, selectedRepos: [] };
     case REPOS_CLEAR:
-      return { ...state, loading: false, repos: [], error: null };
+      return { ...state, loading: false, repos: [], error: null, selectedRepos: [] };
     case REPOS_VALIDATION_ERROR:
-      return { ...state, error: 'Capital letters are not allowed.' };
+      return { ...state, error: 'Capital letters are not allowed.', selectedRepos: [] };
     case REPOS_SELECT_REPO:
       return {
         ...state,

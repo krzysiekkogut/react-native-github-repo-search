@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native';
 import { RepoDetails } from '../redux/reducer';
 
 interface Props {
@@ -9,10 +9,26 @@ interface Props {
 };
 
 export class ReposListItem extends React.Component<Props> {
+  state = {
+    fadeAnimation: new Animated.Value(0),
+  };
+  
+  componentDidMount() {
+    Animated.timing(
+      this.state.fadeAnimation,
+      {
+        toValue: 1,
+        duration: 2500,
+      },
+    ).start();
+  }
+
   render() {
     const { repo, isSelected, onPress } = this.props;
+    const { fadeAnimation } = this.state;
+
     return (
-      <View style={[styles.listItem, isSelected ? styles.selectedListItem : null]}>
+      <Animated.View style={[styles.listItem, isSelected ? styles.selectedListItem : null, { opacity: fadeAnimation }]}>
         <TouchableOpacity style={styles.touch} onPress={() => onPress(repo)}>
           <Image source={{ uri: repo.owner.avatar_url }} style={{ width: 60, height: 60, }} />
           <View style={styles.itemDetails}>
@@ -36,7 +52,7 @@ export class ReposListItem extends React.Component<Props> {
             </Text>
           </View>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     );
   }
 }
