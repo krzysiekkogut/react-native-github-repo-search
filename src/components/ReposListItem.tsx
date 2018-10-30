@@ -44,13 +44,13 @@ export class ReposListItem extends React.Component<Props> {
 const styles = StyleSheet.create({
   listItem: {
     flex: 1,
-    padding: 16,
     marginTop: 12,
     borderColor: '#000',
     borderWidth: 1,
   },
   touch: {
     flex: 1,
+    padding: 16,
     justifyContent: 'center',
     flexDirection: 'row',
   },
