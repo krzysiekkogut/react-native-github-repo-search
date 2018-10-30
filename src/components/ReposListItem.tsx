@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native';
-import { RepoDetails } from '../redux/reducer';
+import { RepoDetails } from '../redux/types';
 
 interface Props {
   repo: RepoDetails;

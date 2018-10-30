@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { ReposState, RepoDetails } from '../redux/reducer';
+import { ReposState, RepoDetails } from '../redux/types';
 
 interface Props {
   selectedRepos: RepoDetails[];

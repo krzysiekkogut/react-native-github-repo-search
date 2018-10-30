@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, TextInput, ActivityIndicator, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { ReposState } from '../redux/reducer';
-
-import { fetchRepos, clearRepos, showValidationError } from '../redux/reducer';
+import { ReposState } from '../redux/types';
+import { fetchRepos, clearRepos, showValidationError } from '../redux/actions';
 
 interface Actions {
   fetchRepos: Function;

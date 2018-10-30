@@ -1,29 +1,14 @@
-const REPOS_LOAD = 'repos/LOAD';
-const REPOS_LOAD_SUCCESS = 'repos/LOAD_SUCCESS';
-const REPOS_LOAD_FAIL = 'repos/LOAD_FAIL';
-const REPOS_CLEAR = 'repos/CLEAR';
-const REPOS_VALIDATION_ERROR = 'repos/VALIDATION_ERROR';
-const REPOS_SELECT_REPO = 'repos/SELECT_REPO';
-const REPOS_UNSELECT_REPO = 'repos/UNSELECT_REPO';
+import {
+  REPOS_LOAD,
+  REPOS_LOAD_SUCCESS,
+  REPOS_LOAD_FAIL,
+  REPOS_CLEAR,
+  REPOS_VALIDATION_ERROR,
+  REPOS_SELECT_REPO,
+  REPOS_UNSELECT_REPO,
+} from './constants';
 
-export interface RepoDetails {
-  id: number;
-  name: string;
-  owner: {
-    login: string;
-    avatar_url: string;
-    url: string;
-  };
-  created_at: Date;
-  stargazers_count: number;
-}
-
-export interface ReposState {
-  repos: RepoDetails[];
-  selectedRepos: RepoDetails[];
-  error: string | null
-  loading: boolean;
-}
+import { ReposState } from './types';
 
 const initialState: ReposState = {
   loading: false,
@@ -31,45 +16,6 @@ const initialState: ReposState = {
   repos: [],
   selectedRepos: [],
 };
-
-export function fetchRepos(query: string) {
-  return {
-    type: REPOS_LOAD,
-    payload: {
-      request: {
-        url: `/search/repositories?q=${query}`,
-      },
-    },
-    query,
-  };
-}
-
-export function clearRepos() {
-  return {
-    type: REPOS_CLEAR,
-  };
-}
-
-export function showValidationError(query: string) {
-  return {
-    type: REPOS_VALIDATION_ERROR,
-    query
-  };
-}
-
-export function selectRepo(repo: RepoDetails) {
-  return {
-    type: REPOS_SELECT_REPO,
-    repo,
-  };
-}
-
-export function unselectRepo (repo: RepoDetails) {
-  return {
-    type: REPOS_UNSELECT_REPO,
-    repo,
-  };
-}
 
 export function reducer(state = initialState, action: any): ReposState {
   switch (action.type) {

@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FlatList, StyleSheet } from 'react-native';
 
-import { ReposState, RepoDetails, selectRepo, unselectRepo } from '../redux/reducer';
+import { ReposState, RepoDetails } from '../redux/types';
+import { selectRepo, unselectRepo } from '../redux/actions';
 
 import { EmptyReposList } from './EmptyReposList';
 import { ReposListItem } from './ReposListItem';
