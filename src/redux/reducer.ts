@@ -3,6 +3,8 @@ const REPOS_LOAD_SUCCESS = 'repos/LOAD_SUCCESS';
 const REPOS_LOAD_FAIL = 'repos/LOAD_FAIL';
 const REPOS_CLEAR = 'repos/CLEAR';
 const REPOS_VALIDATION_ERROR = 'repos/VALIDATION_ERROR';
+const REPOS_SELECT_REPO = 'repos/SELECT_REPO';
+const REPOS_UNSELECT_REPO = 'repos/UNSELECT_REPO';
 
 export interface RepoDetails {
   id: number;
@@ -18,6 +20,7 @@ export interface RepoDetails {
 
 export interface ReposState {
   repos: RepoDetails[];
+  selectedRepos: RepoDetails[];
   error: string | null
   loading: boolean;
 }
@@ -26,6 +29,7 @@ const initialState: ReposState = {
   loading: false,
   error: null,
   repos: [],
+  selectedRepos: [],
 };
 
 export function fetchRepos(query: string) {
@@ -53,7 +57,20 @@ export function showValidationError(query: string) {
   };
 }
 
-// TODO: introduce Action Types
+export function selectRepo(repo: RepoDetails) {
+  return {
+    type: REPOS_SELECT_REPO,
+    repo,
+  };
+}
+
+export function unselectRepo (repo: RepoDetails) {
+  return {
+    type: REPOS_UNSELECT_REPO,
+    repo,
+  };
+}
+
 export function reducer(state = initialState, action: any): ReposState {
   switch (action.type) {
     case REPOS_LOAD:
@@ -65,7 +82,17 @@ export function reducer(state = initialState, action: any): ReposState {
     case REPOS_CLEAR:
       return { ...state, loading: false, repos: [], error: null };
     case REPOS_VALIDATION_ERROR:
-      return { ...state, error: 'Capital letters are not allowed.' }
+      return { ...state, error: 'Capital letters are not allowed.' };
+    case REPOS_SELECT_REPO:
+      return {
+        ...state,
+        selectedRepos: state.selectedRepos.concat(action.repo),
+      }
+    case REPOS_UNSELECT_REPO:
+      return {
+        ...state,
+        selectedRepos: state.selectedRepos.filter(repo => repo.id !== action.repo.id),
+      };
     default:
       return state;
   }

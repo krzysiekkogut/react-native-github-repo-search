@@ -1,37 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { RepoDetails } from '../redux/reducer';
 
 interface Props {
   repo: RepoDetails;
+  isSelected: boolean;
+  onPress: Function;
 };
 
 export class ReposListItem extends React.Component<Props> {
   render() {
-    const { repo } = this.props;
+    const { repo, isSelected, onPress } = this.props;
     return (
-      <View style={styles.listItem}>
-        <Image source={{ uri: repo.owner.avatar_url }} style={{ width: 60, height: 60, }}/>
-        <View style={styles.itemDetails}>
-          <Text>
-            <Text style={styles.bold}>
-              Repository:{' '}
+      <View style={[styles.listItem, isSelected ? styles.selectedListItem : null]}>
+        <TouchableOpacity style={styles.touch} onPress={() => onPress(repo)}>
+          <Image source={{ uri: repo.owner.avatar_url }} style={{ width: 60, height: 60, }} />
+          <View style={styles.itemDetails}>
+            <Text>
+              <Text style={styles.bold}>
+                Repository:{' '}
+              </Text>
+              {repo.name}
             </Text>
-            {repo.name}
-          </Text>
-          <Text>
-            <Text style={styles.bold}>
-              Owner:{' '}
+            <Text>
+              <Text style={styles.bold}>
+                Owner:{' '}
+              </Text>
+              {repo.owner.login}
             </Text>
-            {repo.owner.login}
-          </Text>
-          <Text>
-            <Text style={styles.bold}>
-              Stars:{' '}  
+            <Text>
+              <Text style={styles.bold}>
+                Stars:{' '}
+              </Text>
+              {repo.stargazers_count}
             </Text>
-            {repo.stargazers_count}
-          </Text>
-        </View>
+          </View>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -40,12 +44,18 @@ export class ReposListItem extends React.Component<Props> {
 const styles = StyleSheet.create({
   listItem: {
     flex: 1,
-    justifyContent: 'center',
     padding: 16,
     marginTop: 12,
     borderColor: '#000',
     borderWidth: 1,
+  },
+  touch: {
+    flex: 1,
+    justifyContent: 'center',
     flexDirection: 'row',
+  },
+  selectedListItem: {
+    backgroundColor: '#dadada',
   },
   itemDetails: {
     flex: 1,
