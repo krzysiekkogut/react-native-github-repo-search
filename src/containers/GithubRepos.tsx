@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { Title } from '../components/Title';
 import Search from '../components/Search';
 import SearchResults from '../components/SearchResults';
+import StarsCount from '../components/StarsCount';
 
 export class GithubRepos extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export class GithubRepos extends React.Component {
         <Title />
         <Search />
         <SearchResults />
+        <StarsCount />
       </View>
     );
   }
