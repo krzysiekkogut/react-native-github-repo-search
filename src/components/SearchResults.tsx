@@ -25,7 +25,7 @@ export class SearchResults extends React.Component<Props & Actions> {
     ? this.props.unselectRepo(repo)
     : this.props.selectRepo(repo);
 
-  private isRepoSelected = (repo: RepoDetails) : boolean => this.props.selectedRepos.map(repo => repo.id).indexOf(repo.id) >= 0;
+  private isRepoSelected = (repo: RepoDetails): boolean => this.props.selectedRepos.map(repo => repo.id).indexOf(repo.id) >= 0;
 
   render() {
     const { repos, error } = this.props;
@@ -38,7 +38,7 @@ export class SearchResults extends React.Component<Props & Actions> {
         keyExtractor={repo => `${repo.id}`}
         ListEmptyComponent={<EmptyReposList />}
         style={styles.list}
-      />
+      />;
   }
 }
 

@@ -1,14 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export class EmptyReposList extends React.Component {
-  render() {
-    return (
-      <View style={styles.listItem}>
-        <Text>No repos found.</Text>
-      </View>
-    );
-  }
+export const EmptyReposList = () => {
+  return (
+    <View style={styles.listItem}>
+      <Text>No repos found.</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

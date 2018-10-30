@@ -1,7 +1,6 @@
 import {
   REPOS_LOAD,
   REPOS_CLEAR,
-  REPOS_VALIDATION_ERROR,
   REPOS_SELECT_REPO,
   REPOS_UNSELECT_REPO,
 } from './constants';
@@ -22,13 +21,6 @@ export function fetchRepos(query: string) {
 export function clearRepos() {
   return {
     type: REPOS_CLEAR,
-  };
-}
-
-export function showValidationError(query: string) {
-  return {
-    type: REPOS_VALIDATION_ERROR,
-    query
   };
 }
 

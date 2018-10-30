@@ -3,7 +3,6 @@ import {
   REPOS_LOAD_SUCCESS,
   REPOS_LOAD_FAIL,
   REPOS_CLEAR,
-  REPOS_VALIDATION_ERROR,
   REPOS_SELECT_REPO,
   REPOS_UNSELECT_REPO,
 } from './constants';
@@ -27,8 +26,6 @@ export function reducer(state = initialState, action: any): ReposState {
       return { ...state, loading: false, repos: [], error: action.error.response.data.message, selectedRepos: [] };
     case REPOS_CLEAR:
       return { ...state, loading: false, repos: [], error: null, selectedRepos: [] };
-    case REPOS_VALIDATION_ERROR:
-      return { ...state, error: 'Capital letters are not allowed.', selectedRepos: [] };
     case REPOS_SELECT_REPO:
       return {
         ...state,

@@ -13,6 +13,6 @@ export interface RepoDetails {
 export interface ReposState {
   repos: RepoDetails[];
   selectedRepos: RepoDetails[];
-  error: string | null
+  error: string | null;
   loading: boolean;
 }
